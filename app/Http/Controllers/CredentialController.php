@@ -53,25 +53,17 @@ class CredentialController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Credential  $credential
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Credential $credential)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Credential  $credential
      * @return \Illuminate\Http\Response
      */
-    public function edit(Credential $credential)
+    public function edit($credential)
     {
-        //
+        $data = [
+            'credential'=>Credential::find($credential)
+        ];
+        return view('vault.edit',$data);
     }
 
     /**
@@ -81,9 +73,25 @@ class CredentialController extends Controller
      * @param  \App\Models\Credential  $credential
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Credential $credential)
+    public function update(Request $request,$credential)
     {
-        //
+        $request->validate([
+            'website_name'=>'min:3',
+            'website_url'=>'url:http,https',
+            'username'=>'required',
+            'password'=>'required'
+        ]);
+
+        $data = Credential::find($credential);
+
+        $data->website_name = $request->input('website_name');
+        $data->website_url = $request->input('website_url');
+        $data->username = $request->input('username');
+        $data->password = $request->input('password');
+
+        $data->update();
+
+        return redirect('/manage')->with('message','Credential Edited Successfully !!');
     }
 
     /**

@@ -34,5 +34,10 @@ Route::middleware(['auth'])->group(function(){
 
     Route::post('/credential',[CredentialController::class,'store']);
 
+    Route::get('/credential/edit/{credential}',[CredentialController::class,'edit']);
+
+    Route::put('/credential/update/{credential}',[CredentialController::class,'update']);
+
     Route::delete('/credential/{credential}',[CredentialController::class,'destroy']);
+
 });

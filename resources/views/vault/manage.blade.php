@@ -37,7 +37,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <a data-nm="{{ $credential->website_name }}" data-wu="{{ $credential->website_url }}" data-un="{{ $credential->username }}" data-ps="{{ $credential->password }}" href="javascript:void(0)" class="bg-green-600 p-2 text-white view_credential" data-modal-target="credentialModal" data-modal-toggle="credentialModal" >View</a>
-                            <a class="bg-violet-600 p-2 text-white">Edit</a>
+                            <a href="{{ url('/credential/edit/'.$credential->id) }}" class="bg-violet-600 p-2 text-white">Edit</a>
                             <form class="inline" method="POST" action="{{ url('credential/'.$credential->id) }}">
                             @csrf
                             @method('DELETE')
